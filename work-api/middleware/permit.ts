@@ -8,10 +8,11 @@ const permit = (...roles: string[]) => {
     if (!req.user) {
       return res.status(401).send({'message': 'Unauthenticated'});
     }
-
     if (!roles.includes(req.user.role)) {
+      console.log(req.user._id, roles);
       return res.status(403).send({'message': 'Unauthorized'});
     }
+
 
     next();
   }
