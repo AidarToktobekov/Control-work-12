@@ -9,13 +9,12 @@ import { imagesUpload } from "../multer";
 const userRouter = express.Router();
 const googleClient = new OAuth2Client(config.google.clientId);
 
-userRouter.post('/', imagesUpload.single('avatar') , async (req, res, next) => {
+userRouter.post('/',  async (req, res, next) => {
     try{
         const userMutation = {
             username: req.body.username,
             password: req.body.password,
             displayName: req.body.displayName,
-            avatar: req.file ? `http://localhost:8000/images/${req.file.filename}` : null,
         };
 
         const user = new User(userMutation);
@@ -61,7 +60,6 @@ userRouter.post('/google', async (req, res, next) => {
         password: newPassword,
         googleId: id,
         displayName,
-        avatar: payload.picture,
         });
     }
   
