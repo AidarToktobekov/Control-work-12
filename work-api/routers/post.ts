@@ -33,7 +33,7 @@ postRouter.post('/', auth, imagesUpload.single('image'), async(req, res, next)=>
             userId: user?._id,
             image: req.file?.filename,
             title: req.body.title,
-        }
+        };
 
         const post = new Post(postMutation);
         post.save();

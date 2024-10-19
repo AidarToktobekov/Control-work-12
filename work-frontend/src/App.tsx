@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Register from './features/User/Register'
 import Login from './features/User/Login'
 import Posts from './features/Post/Posts'
+import AddNewPost from './features/Post/AddNewPost'
 
 
 const App = ()=> {
@@ -23,6 +24,11 @@ const App = ()=> {
           <Route path='/:id' element={
             <> 
               <Posts/>
+            </>
+          }/>
+          <Route path='/add-new-post' element={
+            <> 
+              <AddNewPost/>
             </>
           }/>
           <Route path='/register' element={

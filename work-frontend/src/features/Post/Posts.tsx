@@ -42,7 +42,11 @@ const Posts = ()=>{
             {id? (
                 <div className="d-flex justify-content-between align-items-center">
                     <h1 className="my-3">
-                        {posts[0]?.username}
+                        {posts[0]? (
+                            posts[0].username
+                        ):(
+                            user?.displayName
+                        )}
                     </h1>
                     {user?._id === id? (
                         <NavLink to='/add-new-post' className='btn btn-primary'>
@@ -56,6 +60,13 @@ const Posts = ()=>{
                 null
             )}
             <div className="d-flex gap-2 justify-content-center py-4">
+                {posts.length < 1? (
+                    <h5>
+                        No posts yet
+                    </h5>
+                ):(
+                    null
+                )}
                 {loading? (
                     <CircularProgress></CircularProgress>
                 ) : (

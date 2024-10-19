@@ -42,3 +42,8 @@ export interface IPost{
     image: string;
     title: string;
 }
+
+export interface PostMutation{
+    image: string | null;
+    title: string;
+}
