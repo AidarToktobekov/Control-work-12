@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IPost } from "../../types";
-import { fetchPosts } from "./postThunk";
+import { deletePost, fetchPosts } from "./postThunk";
 
 interface PostState{
     posts: IPost[];
@@ -26,6 +26,15 @@ export const postSlice = createSlice({
                 state.posts = posts;
             })
             .addCase(fetchPosts.rejected, state=>{
+                state.loading = false;
+            })
+            .addCase(deletePost.pending, state=>{
+                state.loading = true;
+            })
+            .addCase(deletePost.fulfilled, (state)=>{
+                state.loading = false;
+            })
+            .addCase(deletePost.rejected, state=>{
                 state.loading = false;
             })
     },

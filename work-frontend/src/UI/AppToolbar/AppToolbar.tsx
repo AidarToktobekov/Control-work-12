@@ -35,11 +35,16 @@ const AppToolbar = ()=>{
     if (user) {
         links = (
             <>
-                <NavLink className="navbar-brand text-light ms-auto" to='/add'>Add</NavLink>
+                <NavLink className="navbar-brand text-light ms-auto" to='/add-new-post'>Add New Post</NavLink>
                 <button className="navbar-brand text-light btn d-flex align-items-center gap-2" onClick={handleClick}>
                     {user.displayName}
                 </button>
                 <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
+                    <MenuItem>
+                        <NavLink to={`/${user._id}`} className='text-decoration-none text-dark'>
+                            My posts
+                        </NavLink>
+                    </MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
             </>

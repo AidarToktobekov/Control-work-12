@@ -9,4 +9,9 @@ export const fetchPosts = createAsyncThunk<IPost[], string | undefined>('posts/f
     }
     const {data: posts} = await axiosApi.get<IPost[]>('/posts');
     return posts; 
-})
+});
+
+export const deletePost = createAsyncThunk<IPost, string>('posts/delete',  async (id) => {
+    const { data: post } = await axiosApi.delete<IPost>(`/posts/${id}`);
+    return post;
+});

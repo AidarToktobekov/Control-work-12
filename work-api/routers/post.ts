@@ -51,18 +51,12 @@ postRouter.post('/', auth, imagesUpload.single('image'), async(req, res, next)=>
 postRouter.delete('/:id', auth, async(req, res, next)=>{
     try{
         const user = (req as RequestWithUser).user;
-        console.log(user);
-        
         if (!user) {
             res.status(403).send({error: 'Unauthorized'});
         }
         const post = await Post.findById(req.params.id);
         if (String(user?._id) !== String(post?.userId)) {
-            console.log(user?._id, post?.userId );
-            
             if (user?.role !== 'admin') {
-                console.log('eee');
-
                 return res.status(403).send({'message': 'Unauthorized'});
             }
         }

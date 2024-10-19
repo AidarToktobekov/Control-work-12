@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchPosts } from "./postThunk";
+import { deletePost, fetchPosts } from "./postThunk";
 import { NavLink, useParams } from "react-router-dom";
 import { selectLoading, selectPosts } from "./postSlice";
 import { Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Dialog, Typography } from "@mui/material";
@@ -25,7 +25,11 @@ const Posts = ()=>{
     const [open, setOpen] = useState(false);
     const [imageModal, setImageModal] = useState('');
   
-    
+    const onDelete = (id: string)=>{
+        dispatch(deletePost(id));
+        location.reload();
+    }
+
     const handleClickOpen = (image: string) => {
         setOpen(true);
         setImageModal(image);
@@ -35,6 +39,22 @@ const Posts = ()=>{
     };
     return(
         <>
+            {id? (
+                <div className="d-flex justify-content-between align-items-center">
+                    <h1 className="my-3">
+                        {posts[0]?.username}
+                    </h1>
+                    {user?._id === id? (
+                        <NavLink to='/add-new-post' className='btn btn-primary'>
+                            Add new post
+                        </NavLink>
+                    ): (
+                        null
+                    )}
+                </div>
+            ):(
+                null
+            )}
             <div className="d-flex gap-2 justify-content-center py-4">
                 {loading? (
                     <CircularProgress></CircularProgress>
@@ -51,16 +71,22 @@ const Posts = ()=>{
                                     <Typography gutterBottom variant="h5" component="div">
                                         {post.title}
                                     </Typography>
-                                    By: <NavLink to={`/${post.userId}`}>{post.username}</NavLink>
+                                    {id? (
+                                        null
+                                    ):(
+                                        <>
+                                            By: <NavLink to={`/${post.userId}`}>{post.username}</NavLink>
+                                        </>
+                                    )}
                                 </CardContent>
                                 <CardActions>
                                     {user?.role === 'admin'? (
                                         <>
-                                            <Button variant="contained" color="error">Delete</Button>
+                                            <Button variant="contained" onClick={()=>onDelete(post._id)} color="error">Delete</Button>
                                         </>
                                     ):(
                                         user?._id === post.userId? (
-                                            <Button variant="contained" color="error">Delete</Button>
+                                            <Button variant="contained" onClick={()=>onDelete(post._id)} color="error">Delete</Button>
                                         ): (
                                             null
                                         )
