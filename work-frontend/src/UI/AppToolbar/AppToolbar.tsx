@@ -49,7 +49,7 @@ const AppToolbar = ()=>{
     return(
         <nav className="navbar navbar-expand-lg">
             <div className="container">
-                <NavLink className="navbar-brand text-light" to='/'>Home</NavLink>
+                <NavLink className="navbar-brand text-light" to='/'>Photo Callery</NavLink>
                 {links}
             </div>
         </nav>

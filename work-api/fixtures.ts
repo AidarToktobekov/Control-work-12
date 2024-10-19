@@ -33,17 +33,17 @@ const run = async () => {
     {
       username: user.displayName,
       userId: user._id,
-      image: 'fixtures/image-1',
+      image: 'fixtures/image-1.jpg',
       title: 'Горы',
     },{
       username: user.displayName,
       userId: user._id,
-      image: 'fixtures/image-2',
+      image: 'fixtures/image-2.jpg',
       title: 'Озеро',
     },{
       username: admin.displayName,
       userId: admin._id,
-      image: 'fixtures/image-3',
+      image: 'fixtures/image-3.jpeg',
       title: 'Пустыня',
     });
 
